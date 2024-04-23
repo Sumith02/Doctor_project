@@ -130,7 +130,7 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Mr. Doctor</a>
+                                            <a class="js-acc-btn" href="#" id="fullName"></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -143,7 +143,7 @@
                                                     <h5 class="name">
                                                         <a href="#">Mr.Doctor</a>
                                                     </h5>
-                                                    <span class="email">admin@alvasmedical.org</span>
+                                                    <span class="email" id="email"></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -188,7 +188,7 @@
                                                 <i class="zmdi zmdi-account-o"></i>
                                             </div>
                                             <div class="text">
-                                                <h2 id="medicineCount"></h2>
+                                                <h2 id="vendorCount"></h2>
                                                 <span>Total Vendors</span>
                                             </div>
                                         </div>
@@ -207,7 +207,7 @@
                                             </div>
                                             <div class="text">
 
-                                                <h2></h2>
+                                                <h2 id="medicineCount"></h2>
                                                 <span>Total Medicines</span>
                                             </div>
                                         </div>
@@ -225,7 +225,7 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>1,086</h2>
+                                                <h2 id="medicineCountThisWeek"></h2>
                                                 <span>Added in this Week</span>
                                             </div>
                                         </div>
@@ -243,7 +243,7 @@
                                                 <i class="zmdi zmdi-money"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>₹1,060,386</h2>
+                                                <h2 id="totalExpenditure">₹</h2>
                                                 <span>Total Expenditure</span>
                                             </div>
                                         </div>
@@ -493,6 +493,23 @@
         fetch('http://localhost:5000/medi/vendorcount')
             .then(response => response.json())
             .then(data => {
+                const medicineCountElement = document.getElementById('vendorCount');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('vendorCount');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/medicinecount')
+            .then(response => response.json())
+            .then(data => {
                 const medicineCountElement = document.getElementById('medicineCount');
                 medicineCountElement.textContent = ` ${data.totalMedicines}`;
             })
@@ -504,6 +521,67 @@
 
             console.log(data.totalMedicines);
         });
+    </script>
+    <script>
+        function fetchMedicineCountThisWeek() {
+            fetch('http://localhost:5000/medi/withinweek')
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById('medicineCountThisWeek').textContent = data.countThisWeek;
+                })
+                .catch(error => {
+                    console.error('Error fetching medicine count for this week:', error);
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', fetchMedicineCountThisWeek);
+
+
+        setInterval(fetchMedicineCountThisWeek, 7 * 24 * 60 * 60 * 1000); // Every week
+    </script>
+
+    <script>
+        // Function to fetch user profile data
+        function fetchUserProfile() {
+            fetch('http://localhost:5000/medi/viewprofile')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user profile');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Update profile data on the frontend
+                    document.getElementById('fullName').textContent = data.full_name;
+                    document.getElementById('email').textContent = data.email;
+                    document.getElementById('phone').textContent = data.phone;
+                })
+                .catch(error => {
+                    console.error('Error fetching user profile:', error);
+                });
+        }
+
+        // Fetch user profile data when the page loads
+        document.addEventListener('DOMContentLoaded', fetchUserProfile);
+    </script>
+    <script>
+        // Function to fetch the total expenditure from the backend
+        function fetchTotalExpenditure() {
+            fetch('http://localhost:5000/medi/totalamt') // Assuming the endpoint is '/medi/totalExpenditure'
+                .then(response => response.json())
+                .then(data => {
+                    // Update the total expenditure on the frontend
+                    document.getElementById('totalExpenditure').textContent = data.totalExpenditure;
+                })
+                .catch(error => {
+                    console.error('Error fetching total expenditure:', error);
+                });
+        }
+
+        // Fetch the total expenditure when the page loads
+        document.addEventListener('DOMContentLoaded', fetchTotalExpenditure);
     </script>
 </body>
 
