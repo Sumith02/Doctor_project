@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>TABLE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <input type="text" id="searchInput" placeholder="Enter search query">
+    <!-- <button onclick="search()">Search</button> -->
+    <br>
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="table-wrap">
+
+                        <table class="table myaccordion table-hover" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID_ NO</th>
+                                    <th>Medicine Name</th>
+                                    <th>Company Name</th>
+                                    <th>Medicine Description</th>
+                                    <th>Category</th>
+                                    <th>Manufacture Date</th>
+                                    <th>Expire Date</th>
+                                    <th>Selling Price(INR)</th>
+                                    <th>Quantity</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js "></script>
+    <script src="js/popper.js "></script>
+    <script src="js/bootstrap.min.js "></script>
+    <script src="js/main.js "></script>
+
+    <script>
+        const table = document.getElementById('data-table');
+        const tableBody = table.querySelector('tbody');
+
+        // Fetch data from database using Express and MySQL
+        fetch('http://localhost:5000/medi/viewpills')
+            .then(response => response.json())
+            .then(data => {
+                // Process fetched data
+                const columns = Object.keys(data[0]);
+                const rows = data;
+
+                // Create table rows dynamically
+                rows.forEach(row => {
+                    const tr = document.createElement('tr');
+                    columns.forEach(column => {
+                        const td = document.createElement('td');
+                        td.textContent = row[column];
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors appropriately, e.g., display an error message to the user
+            });
+    </script>
+    <script>
+        // Function to fetch search results
+        function search(searchQuery) {
+            fetch('http://localhost:5000/medi/searchquery', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        searchQuery
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    displaySearchResults(data);
+                })
+                .catch(error => {
+                    console.error('Error searching data:', error);
+                    alert('An error occurred while searching.');
+                });
+        }
+
+        // Function to display search results
+        function displaySearchResults(results) {
+            const tableBody = document.querySelector('#data-table tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            if (results.length === 0) {
+                const noResultsRow = tableBody.insertRow();
+                const cell = noResultsRow.insertCell();
+                cell.textContent = 'No results found.';
+                cell.colSpan = 9; // Adjust the colspan based on the number of columns in your table
+                return;
+            }
+
+            results.forEach(result => {
+                const row = tableBody.insertRow();
+                const idCell = row.insertCell();
+                idCell.textContent = result['Medicine ID'];
+
+                const nameCell = row.insertCell();
+                nameCell.textContent = result['Medicine Name'];
+
+                const companyCell = row.insertCell();
+                companyCell.textContent = result['Company Name'];
+
+                const descriptionCell = row.insertCell();
+                descriptionCell.textContent = result['Medicine Description'];
+
+                const categoryCell = row.insertCell();
+                categoryCell.textContent = result['Category'];
+
+                const manufactureDateCell = row.insertCell();
+                manufactureDateCell.textContent = result['Manufacture Date'];
+
+                const expireDateCell = row.insertCell();
+                expireDateCell.textContent = result['Expire Date'];
+
+                const sellingPriceCell = row.insertCell();
+                sellingPriceCell.textContent = result['Selling Price(INR)'];
+
+                const quantityCell = row.insertCell();
+                quantityCell.textContent = result['Quantity'];
+            });
+        }
+
+        // Event listener for input event on search input field
+        document.getElementById('searchInput').addEventListener('input', function(event) {
+            const searchQuery = event.target.value.trim();
+            search(searchQuery);
+        });
+    </script>
+</body>
+
+</html>
