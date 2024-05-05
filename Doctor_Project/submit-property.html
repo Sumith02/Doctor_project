@@ -66,7 +66,7 @@
             <div class="collapse navbar-collapse yamm" id="navigation">
                 <div class="button navbar-right">
                     <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.location.href ='register.html'" data-wow-delay="0.45s">Logout</button>
-                    <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.href='submit-property.html'" data-wow-delay="0.48s">Submit</button>
+                    <!-- <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.href='submit-property.html'" data-wow-delay="0.48s">Submit</button> -->
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
                     <li class="dropdown yamm-fw" data-wow-delay="0.4s">
@@ -115,16 +115,16 @@
                                         <div class="col-sm-6">
                                             <div class="form-group" style="padding-left:200px;width:750px;">
                                                 <label>Medicine name </label>
-                                                <input name="propertyname" type="text" class="form-control" placeholder="Medicine Name">
+                                                <input name="propertyname" type="text" class="form-control" placeholder="Medicine Name" required>
                                             </div>
 
                                             <div class="form-group" style="padding-left:200px;width:750px;">
                                                 <label>Medicine company </label>
-                                                <input name="company name" type="text" class="form-control" placeholder="company name">
+                                                <input name="company name" type="text" class="form-control" placeholder="company name" required>
                                             </div>
                                             <div class="form-group" style="padding-left:200px;width:750px;">
                                                 <label>Category </label>
-                                                <select id="fruitSelect" name="fruits" class="form-control">
+                                                <select id="fruitSelect" name="fruits" class="form-control" required>
                                                 <option value="tablets">Tablets</option>
                                                 <option value="solution">Solution</option>
                                                 <option value="Decongestant spray">Decongestant spray</option>
@@ -148,7 +148,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label>Medicine Description :</label>
-                                                    <input name="propertyname" type="text" class="form-control" placeholder="discrition">
+                                                    <input name="propertyname" type="text" class="form-control" placeholder="discrition" required>
 
                                                 </div>
                                             </div>
@@ -158,26 +158,26 @@
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Manufacture Date  :</label>
-                                                    <input type="date" name="manudate" id="basic" class="form-control">
+                                                    <input type="date" name="manudate" id="basic" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Expire Date  :</label>
-                                                    <input type="date" name="expdate" id="basic" class="form-control">
+                                                    <input type="date" name="expdate" id="basic" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>Quantity :</label>
-                                                    <input type="number" name="Quantity" id="basic" class="form-control">
+                                                    <input type="number" name="Quantity" id="basic" class="form-control" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>price</label>
-                                                    <input type="number" name="Discount" id="basic" class="form-control">
+                                                    <input type="number" name="Discount" id="basic" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +200,7 @@
                                                     to the collection, use and disclosure of your personal information in the legal proper manner
                                                 </p>
 
-                                                <div class="checkbox">
+                                                <div class="checkbox" required>
                                                     <label>
                                                             <input type="checkbox" / required> <strong>Accept termes and conditions.</strong>
                                                         </label>
