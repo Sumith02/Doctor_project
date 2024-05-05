@@ -400,31 +400,31 @@
                                                     <tr>
                                                         <td>
                                                             <a href="Doctor_Project/medicines_display/tablets/Doctor_landing.html " style="color: white; ">Tablets</a></td>
-                                                        <td class="text-right " id="medicineCount"> </td>
+                                                        <td class="text-right " id="counttablet"> </td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/pills/Doctor_landing.html" style="color: white; ">Pills</a></td>
-                                                        <td class="text-right ">5</td>
+                                                        <td class="text-right " id="countpills"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/solution/Doctor_landing.html" style="color: white; ">Solution</a></td>
-                                                        <td class="text-right ">22</td>
+                                                        <td class="text-right " id="countsolution"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/antisptic/Doctor_landing.html" style="color: white; ">Antiseptic</a></td>
-                                                        <td class="text-right ">90</td>
+                                                        <td class="text-right " id="countantisptic"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/Oral rinse/Doctor_landing.html" style="color: white; ">Oral rinse</a></td>
-                                                        <td class="text-right ">6</td>
+                                                        <td class="text-right " id="countoral"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/lotion/Doctor_landing.html" style="color: white; ">Lotion</a></td>
-                                                        <td class="text-right ">6</td>
+                                                        <td class="text-right " id="countlotion"></td>
                                                     </tr>
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/spray/Doctor_landing.html" style="color: white; ">Decongestant spray</a></td>
-                                                        <td class="text-right ">5</td>
+                                                        <td class="text-right " id="countspray"></td>
                                                     </tr>
                                                     <!-- <tr>
                                                         <td><a href="Doctor_Project/medicines_display/" style="color: white; ">SoftGel</a></td>
@@ -444,7 +444,7 @@
                                                     </tr> -->
                                                     <tr>
                                                         <td><a href="Doctor_Project/medicines_display/powder/Doctor_landing.html " style="color: white; ">Powder</a></td>
-                                                        <td class="text-right ">16</td>
+                                                        <td class="text-right " id="countpowder"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -524,6 +524,144 @@
         });
     </script>
     <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/counttablet')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('counttablet');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('counttablet');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countantsptic')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countantisptic');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countantisptic');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countlotion')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countlotion');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countlotion');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countoral')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countoral');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countoral');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countpills')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countpills');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countpills');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countpowder')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countpowder');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countpowder');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countsolution')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countsolution');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countsolution');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+
+    <script>
+        // Fetch the total number of medicines from the backend
+        fetch('http://localhost:5000/medi/countspray')
+            .then(response => response.json())
+            .then(data => {
+                const medicineCountElement = document.getElementById('countspray');
+                medicineCountElement.textContent = ` ${data.totalMedicines}`;
+            })
+
+        .catch(error => {
+            console.error('Error fetching medicine count:', error);
+            const medicineCountElement = document.getElementById('countspray');
+            medicineCountElement.textContent = 'Error fetching medicine count';
+
+            console.log(data.totalMedicines);
+        });
+    </script>
+    <script>
         function fetchMedicineCountThisWeek() {
             fetch('http://localhost:5000/medi/withinweek')
                 .then(response => response.json())
@@ -584,6 +722,10 @@
         // Fetch the total expenditure when the page loads
         document.addEventListener('DOMContentLoaded', fetchTotalExpenditure);
     </script>
+</body>
+
+</html>
+<!-- end document-->
 </body>
 
 </html>
